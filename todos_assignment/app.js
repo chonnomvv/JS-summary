@@ -82,14 +82,14 @@ $clearCompleted.addEventListener('click', function () {
 });
 
 $todos.addEventListener('click', function (e) {
-  if (e.target.classList.contains('custom-checkbox')) {
-    todos.map( todo => todo.id === +e.target.parentNode.id ?  Object.assign({}, todo, { completed: !todo.completed}) : todo);
-    renderFooter();
-  } else if (e.target.classList.contains('remove-todo')) {
-    todos = todos.filter( todo => todo.id !== +e.target.parentNode.id);
-    render();
-  }
-  return;
+  if (!e.target.classList.contains('custom-checkbox')) return;
+  todos = todos.map( todo => todo.id === +e.target.parentNode.id ?  Object.assign({}, todo, { completed: !todo.completed}) : todo);
+  renderFooter();
 
+});
 
+$todos.addEventListener('click', function (e) {
+  if (!e.target.classList.contains('remove-todo')) return;
+  todos = todos.filter( todo => todo.id !== +e.target.parentNode.id);
+  render();
 });
