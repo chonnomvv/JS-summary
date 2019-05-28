@@ -80,14 +80,18 @@ $clearCompleted.addEventListener('click', function () {
 });
 
 $todos.addEventListener('click', function (e) {
-  if (!e.target.classList.contains('custom-checkbox')) return;
+  if (!e.target.classList.contains('custom-checkbox') && !e.target.classList.contains('remove-todo')) return;
+  else if(e.target.classList.contains('custom-checkbox')){
   todos = todos.map( todo => todo.id === +e.target.parentNode.id ?  Object.assign({}, todo, { completed: !todo.completed}) : todo);
   renderFooter();
-
-});
-
-$todos.addEventListener('click', function (e) {
-  if (!e.target.classList.contains('remove-todo')) return;
-  todos = todos.filter( todo => todo.id !== +e.target.parentNode.id);
+  }else if(e.target.classList.contains('remove-todo')){
+    todos = todos.filter( todo => todo.id !== +e.target.parentNode.id);
   render();
+  }
 });
+
+// $todos.addEventListener('click', function (e) {
+//   if (!e.target.classList.contains('remove-todo')) return;
+//   todos = todos.filter( todo => todo.id !== +e.target.parentNode.id);
+//   render();
+// });
