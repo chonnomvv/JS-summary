@@ -26,8 +26,6 @@
 //   renderFooter() {
 //     document.querySelector('.completed-todos').innerHTML = todos.filter( todo => todo.completed).length;
 //   }
-
-
 // }
 let todos = [];
 const $input = document.querySelector('.input-todo');
