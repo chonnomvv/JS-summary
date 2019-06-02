@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<pre class = "result"></pre>
+<body>
+  
+  <script>
+
+    const $result = document.querySelector('.result');
+    const render = content => { $result.innerHTML = content};
+    function promise(method, url, payload) {
+
+      return new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open(method, url);
+        xhr.setRequestHeader('Content-Type','application/json');
+        xhr.send(JSON.stringify(payload));
+
+        xhr.onreadystatechange = function() {
+          if(xhr.readyState !== XMLHttpRequest.DONE) return;
+          if(xhr.status >= 200 && xhr.status < 400){
+            resolve(xhr.response);
+          } else {
+            reject(xhr.status);
+          }
+        }
+      })
+      }
+      promise('POST', 'http://localhost:3000/todos', {id:222333222, content:'hello world', completed:true})
+      .then(console.log)
+      promise('GET','http://localhost:3000/todos')
+      .then(render)
+      // .catch(console.error);
+
+
+  </script>
+</body>
+</html>

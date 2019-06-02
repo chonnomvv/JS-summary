@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<pre class = "result"></pre>
+<body>
+  <script>
+    const $result = document.querySelector('.result');
+    const render = content => { $result.innerHTML = JSON.stringify(content, null, 2);};
+
+    // GET
+    // fetch('http://localhost:3000/todos')
+    // .then(res => res.json())
+    // .then(render)
+
+    // GET by ID
+    // fetch('http://localhost:3000/todos/1')
+    // .then(res => res.json())
+    // .then(render)
+
+    // POST
+    // fetch('http://localhost:3000/todos', {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify({ id: 4, content: 'Angular', completed: false })
+    // }).then(res => res.json())
+    //   .then(render)
+    //   .catch(console.log);
+
+      // DELETE
+    // fetch('http://localhost:3000/todos/4', {
+    //   method: 'DELETE'
+    // }).then(res => res.json())
+    //   .then(render)
+    //   .catch(console.log);
+
+    //   // PATCH
+    // fetch('http://localhost:3000/todos/1', {
+    //   method: 'PATCH',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify({ content: "BABO" })
+    // }).then(res => res.json())
+    //   .then(render)
+    //   .catch(console.log);
+
+      // PUT
+      fetch('http://localhost:3000/todos/1',{
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json'},
+        body: JSON.stringify({name: 'LEE', completed: true})
+      }).then(res => res.json())
+        .then(render)
+        .catch(console.log);
+    </script>
+  
+</body>
+</html>

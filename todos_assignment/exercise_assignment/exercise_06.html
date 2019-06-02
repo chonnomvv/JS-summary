@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Stop watch</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Source+Code+Pro');
+
+    .stop-watch {
+      font-family: 'Source Code Pro', monospace;
+      text-align: center;
+      font-size: 3em;
+      padding: 30px;
+    }
+
+    .control {
+      width: 300px;
+      padding: 5px;
+      margin-top: 15px;
+      font-size: 36px;
+      font-weight: bold;
+      border: 2px solid #f44336;
+      border-radius: 4px;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .control:hover {
+      background: #f44336;
+      color: aliceblue;
+    }
+  </style>
+  <title>Stop watch</title>
+</head>
+<body>
+  <div class="stop-watch">
+    <div class="display">00:00:00</div>
+    <button class="control">Start</button>
+  </div>
+  <script>
+    const $control = document.querySelector('.control');
+    const $display = document.querySelector('.display');
+    let flag = 0;
+    let ms = 0;
+    let s = 0;
+    let m = 0;
+    function render() {
+      const mm = String(m).length < 2 ? `0${m}` : m;
+      const ss = String(s).length < 2 ? `0${s}` : s;
+      const msms = String(ms).length < 2 ? `0${ms}` : ms;
+      $display.textContent = `${mm}:${ss}:${msms}`;
+      // $display.innerHTML = `${m}:${s}:${ms}`;
+    }
+    function timer() {
+      ms += 1;
+      if (ms > 99) {
+        s += 1;
+        ms = 0;
+      }
+      if (s > 59) {
+        s = 0;
+        m += 1;
+      }
+      render();
+    }
+    let stopwatch = '';
+    $control.addEventListener('click', function () {
+      if (!flag) {
+        stopwatch = setInterval(timer, 10);
+        flag += 1;
+        $control.innerHTML = 'Stop';
+      } else {
+        if (stopwatch !== null) {
+          clearInterval(stopwatch);
+          $control.innerHTML = 'Start';
+        }
+        flag -= 1;
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Counter</title>
+  <style>
+    .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 130px;
+      margin: 20px auto;
+      font-size: 24px;
+      color: #3f51b5;
+    }
+
+    button {
+      padding: 5px 10px;
+      font-size: 24px;
+      border-radius: 5px;
+      color: #3f51b5;
+      border-color: #3f51b5;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .counter {
+      width: 50px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <button class="increase">+</button>
+    <div class="counter">0</div>
+    <button class="decrease">-</button>
+  </div>
+
+  <script>
+    /* increaser 함수와 decreaser 함수는 독립된 렉시컬 환경을 갖기 때문에 카운터 상태가 연동되지 않음.
+    const $container = document.querySelector('.container');
+    function makeCounter (command) {
+      let _count = 0;
+      return function () {
+        _count = command(_count);
+        return _count;
+      };
+    }
+
+    function increase (n) {
+      return ++n;
+    }
+
+    function decrease (n) {
+      return --n;
+    }
+    const increaser = makeCounter(increase);
+    const decreaser = makeCounter(decrease);
+
+    $container.addEventListener('click', function (e) {
+      if (e.target.className === 'increase') document.querySelector('.counter').innerHTML = increaser();
+      else document.querySelector('.counter').innerHTML = decreaser();
+
+    });
+    */
+
+    const $container = document.querySelector('.container');
+    function Counter() {
+      // 카운터상태 유지용 변수
+      let counter = 0;
+      // this.increase = function () {
+      //   return ++counter;
+      // };
+
+      // this.decrease = function () {
+      //   counter = counter <= 0 ? counter : --counter;
+      //   return counter;
+      // };
+      return {
+        increase: function () {
+          return ++counter;
+        },
+        decrease: function () {
+          return counter <= 0 ? 0 : --counter;
+        }
+    };
+  }
+    const counter = new Counter();
+
+    $container.addEventListener('click', function (e) {
+      if (e.target.className === 'increase') document.querySelector('.counter').innerHTML = counter.increase();
+      else document.querySelector('.counter').innerHTML = counter.decrease();
+    });
+  </script>
+</body>
+</html>
